@@ -91,6 +91,7 @@ public class BatchConfiguration {
   @StepScope
   @Bean
   public FlatFileItemWriter<User> writer(@Value("#{stepExecutionContext[fromId]}") Integer fromId, @Value("#{stepExecutionContext[toId]}") Integer toId) {
+    //https://jira.spring.io/browse/BATCH-2097
     FlatFileItemWriter<User> writer = new FlatFileItemWriter<User>();
     writer.setResource(new FileSystemResource("csv/outputs/users.processed-"+fromId+"-"+toId+".csv"));
     writer.setAppendAllowed(false);
