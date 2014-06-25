@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        maven { url "http://repo.spring.io/libs-release" }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.1.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'simple-batch-processing'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-release" }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-batch")
+    compile("org.springframework:spring-oxm")
+    compile("org.springframework:spring-context-support")
+    compile("org.hsqldb:hsqldb")
+    compile("org.quartz-scheduler:quartz:2.2.1")
+    testCompile("junit:junit")
+}
+
+springBoot {
+    mainClass = "com.batch.simple.Application"
+}
+
+task wrapper(type: Wrapper) {
+     gradleVersion = '1.12'
+}
